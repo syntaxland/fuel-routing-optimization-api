@@ -1,9 +1,8 @@
+
 ```markdown
 # Fuel Routing Optimization API
 
 A robust Django REST API designed to calculate the optimal driving route between two locations within the USA and determine the most cost-effective fuel stops. The system assumes a vehicle with a 500-mile maximum range and a fuel efficiency of 10 miles per gallon (MPG).
-
-
 
 ## Features
 * **Optimal Routing:** Integrates with the Open Source Routing Machine (OSRM) API to generate accurate driving routes.
@@ -17,7 +16,7 @@ A robust Django REST API designed to calculate the optimal driving route between
 * Python 3.10+ (Required for the latest stable Django versions)
 * pip (Python package installer)
 
-## ocal Setup & Installation
+## Local Setup & Installation
 
 **1. Clone the repository**
 ```bash
@@ -48,7 +47,6 @@ pip install -r requirements.txt
 
 **4. Run database migrations**
 
-<!-- python manage.py makemigrations  -->
 ```bash
 python manage.py migrate
 
@@ -68,13 +66,6 @@ python manage.py load_stations
 python manage.py runserver
 
 ```
-
-**7. Run Test**
-
-```bash
-python manage.py test api
-```
-
 
 ---
 
@@ -102,22 +93,93 @@ GET http://localhost:8000/api/route/?start=New+York,NY&finish=Los+Angeles,CA
 
 ```json
 {
-    "route_map": "w_w~Ffka~M~r@a... [encoded polyline string]",
-    "total_distance_miles": 2790.5,
-    "total_cost": "$845.20",
+    "route_map": "wqnwFzfubM@BJt@BN@D@Hd@xCBTFXNx... [encoded polyline string for map rendering] ...",
+    "total_distance_miles": 2798.18,
+    "total_cost": "$801.36",
     "fuel_stops": [
         {
-            "station_name": "CHEAP GAS INC",
-            "location": "Columbus, OH",
-            "gallons_purchased": 45.2,
-            "price_per_gallon": 3.10,
-            "cost_at_stop": 140.12
+            "station_name": "ACI TRUCK STOP",
+            "location": "Columbia, NJ",
+            "gallons_purchased": 19.39,
+            "price_per_gallon": 3.079,
+            "cost_at_stop": 59.71,
+            "mile_marker": 193.93
+        },
+        {
+            "station_name": "Certified Oil #400410",
+            "location": "Ravenna, OH",
+            "gallons_purchased": 44.33,
+            "price_per_gallon": 3.31566666,
+            "cost_at_stop": 146.98,
+            "mile_marker": 637.21
+        },
+        {
+            "station_name": "SAPP BROS TRAVEL CENTER",
+            "location": "Peru, IL",
+            "gallons_purchased": 38.79,
+            "price_per_gallon": 3.389,
+            "cost_at_stop": 131.45,
+            "mile_marker": 1025.07
+        },
+        {
+            "station_name": "KUM & GO #4110",
+            "location": "Des Moines, IA",
+            "gallons_purchased": 22.16,
+            "price_per_gallon": 3.02733333,
+            "cost_at_stop": 67.1,
+            "mile_marker": 1246.71
+        },
+        {
+            "station_name": "CUBBYS #2101",
+            "location": "Gothenburg, NE",
+            "gallons_purchased": 27.7,
+            "price_per_gallon": 3.13233333,
+            "cost_at_stop": 86.78,
+            "mile_marker": 1523.76
+        },
+        {
+            "station_name": "CIRCLE K #2744095",
+            "location": "Denver, CO",
+            "gallons_purchased": 16.62,
+            "price_per_gallon": 3.299,
+            "cost_at_stop": 54.84,
+            "mile_marker": 1689.99
+        },
+        {
+            "station_name": "DOWNIEVILLE FUEL STOP",
+            "location": "Dumont, CO",
+            "gallons_purchased": 5.54,
+            "price_per_gallon": 3.459,
+            "cost_at_stop": 19.17,
+            "mile_marker": 1745.4
+        },
+        {
+            "station_name": "TA EXPRESS #6264",
+            "location": "Grand Junction, CO",
+            "gallons_purchased": 41.56,
+            "price_per_gallon": 4.049,
+            "cost_at_stop": 168.26,
+            "mile_marker": 2160.97
+        },
+        {
+            "station_name": "SCENIC QUIK STOP",
+            "location": "Salina, UT",
+            "gallons_purchased": 19.39,
+            "price_per_gallon": 3.459,
+            "cost_at_stop": 67.08,
+            "mile_marker": 2354.9
         }
-        // ... subsequent stops
     ]
 }
 
 ```
+
+### Response Breakdown
+
+* **`route_map`**: A compressed geographic polyline string. Frontend mapping libraries (like Leaflet or Google Maps) decode this to draw the exact driving route on a map.
+* **`total_distance_miles`**: The total driving distance from the start to the finish location.
+* **`total_cost`**: The absolute lowest possible cost to fuel the vehicle for the entire trip, calculated using a greedy optimization algorithm.
+* **`fuel_stops`**: A step-by-step array of the most cost-effective stations to stop at along the route, detailing exactly how many gallons to purchase to reach the next optimal station without exceeding the 500-mile tank capacity.
 
 ---
 
@@ -160,6 +222,7 @@ fuel-routing-optimization-api/
     ├── urls.py                          # Endpoint mapping (/api/route/)
     ├── views.py                         # HTTP request/response handling (OptimalRouteView)
     ├── services.py                      # CORE LOGIC: OSRM API integration & Greedy Algorithm
+    ├── tests.py                         # Unit tests for spatial math and API validation
     │
     └── management/
         └── commands/
@@ -172,3 +235,4 @@ fuel-routing-optimization-api/
 
 ```
 
+```
