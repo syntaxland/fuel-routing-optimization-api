@@ -67,6 +67,13 @@ python manage.py runserver
 
 ```
 
+**7. Run Test**
+
+```bash
+python manage.py test api
+
+```
+
 ---
 
 ## API Endpoint Documentation
