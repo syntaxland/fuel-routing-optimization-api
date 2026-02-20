@@ -232,6 +232,7 @@ fuel-routing-optimization-api/
 
 ---
 
+![Result](result.png)
 
 ```
 
