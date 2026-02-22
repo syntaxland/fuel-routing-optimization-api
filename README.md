@@ -1,5 +1,3 @@
-
-```markdown
 # Fuel Routing Optimization API
 
 A robust Django REST API designed to calculate the optimal driving route between two locations within the USA and determine the most cost-effective fuel stops. The system assumes a vehicle with a 500-mile maximum range and a fuel efficiency of 10 miles per gallon (MPG).
@@ -241,6 +239,3 @@ fuel-routing-optimization-api/
 
 ![Result](result.png)
 
-```
-
-```

@@ -9,7 +9,7 @@ def geocode_location(location_name):
     headers = {'User-Agent': 'FuelOptimizerAPI/1.0'}
     response = requests.get(url, headers=headers).json()
     if not response:
-        raise ValueError(f"Could not geocode location: {location_name}")
+        raise ValueError(f"Could not geocode location: {location_name}") 
     return float(response[0]['lat']), float(response[0]['lon'])
 
 def get_route_data(start_coords, end_coords):
