@@ -18,8 +18,7 @@ A robust Django REST API designed to calculate the optimal driving route between
 
 **1. Clone the repository**
 ```bash
-git clone [https://github.com/syntaxland/fuel-routing-optimization-api.git](https://github.com/syntaxland/fuel-routing-optimization-api.git)
-cd fuel-routing-optimization-api
+git clone https://github.com/syntaxland/fuel-routing-optimization-api.git
 
 ```
 
